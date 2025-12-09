@@ -1,20 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
 <%@ page import="java.util.*" %>
 <%
-    // 認証状態の確認
-    Map<String, Object> currentUser = (Map<String, Object>) session.getAttribute("currentUser");
-    Boolean isAuthenticated = (Boolean) session.getAttribute("isAuthenticated");
-    String playerName = "ゲスト";
-    boolean isLoggedIn = false;
-    
-    if (isAuthenticated != null && isAuthenticated && currentUser != null) {
-        isLoggedIn = true;
-        // ユーザー名または表示名を取得
-        String displayName = (String) currentUser.get("displayName");
-        String username = (String) currentUser.get("username");
-        playerName = (displayName != null && !displayName.trim().isEmpty()) ? displayName : username;
-    }
-    
     // デバッグ: URLパラメータでリセット可能にする
     String reset = request.getParameter("reset");
     if ("true".equals(reset)) {
@@ -55,7 +41,8 @@
         .card.flipping {
             filter: brightness(1.3) drop-shadow(0 0 20px rgba(255,215,0,0.7)) !important;
         }
-          /* ゲームコントロールボタンのスタイル */
+        
+        /* ゲームコントロールボタンのスタイル */
         .game-header {
             position: relative;
             display: flex;
@@ -64,34 +51,6 @@
             flex-wrap: wrap;
             gap: 15px;
             padding: 20px;
-        }
-        
-        /* プレイヤー情報スタイル */
-        .player-info {
-            display: flex;
-            align-items: center;
-            gap: 10px;
-            background: rgba(255, 255, 255, 0.9);
-            padding: 10px 15px;
-            border-radius: 10px;
-            box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
-        }
-        
-        .player-icon {
-            font-size: 1.2em;
-        }
-        
-        .player-name {
-            font-weight: bold;
-            color: #333;
-        }
-        
-        .auth-status {
-            font-size: 0.9em;
-            color: #666;
-            background: rgba(0, 0, 0, 0.05);
-            padding: 2px 8px;
-            border-radius: 5px;
         }
         
         .game-controls {
@@ -134,18 +93,9 @@
             background: linear-gradient(135deg, #74b9ff, #0984e3);
             color: white;
         }
-          .home-btn:hover {
+        
+        .home-btn:hover {
             background: linear-gradient(135deg, #0984e3, #2d3436);
-            transform: translateY(-2px);
-        }
-        
-        .login-btn {
-            background: linear-gradient(135deg, #6c5ce7, #a29bfe);
-            color: white;
-        }
-        
-        .login-btn:hover {
-            background: linear-gradient(135deg, #a29bfe, #fd79a8);
             transform: translateY(-2px);
         }
         
@@ -210,18 +160,7 @@
     </style>
 </head>
 <body>    <div class="game-header">
-        <div class="player-info">
-            <span class="player-icon"><%= isLoggedIn ? "👤" : "🎮" %></span>
-            <span class="player-name">プレイヤー: <%= playerName %></span>
-            <% if (isLoggedIn) { %>
-                <span class="auth-status">✅ ログイン中</span>
-            <% } else { %>
-                <span class="auth-status">👤 ゲストプレイ</span>
-            <% } %>
-        </div>
-        
         <h1>神経衰弱</h1>
-        
         <div class="timer-container">
             <div class="timer-label">⏱️ 経過時間</div>
             <div class="timer-display" id="timer-display">00:00.0</div>
@@ -237,12 +176,6 @@
                 <span class="home-icon">🏠</span>
                 <span class="home-text">ホーム</span>
             </a>
-            <% if (!isLoggedIn) { %>
-                <a href="login.jsp" class="control-btn login-btn">
-                    <span class="login-icon">🔑</span>
-                    <span class="login-text">ログイン</span>
-                </a>
-            <% } %>
         </div>
     </div>
     

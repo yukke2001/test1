@@ -171,7 +171,9 @@
             }
         %>        <!-- 登録フォーム -->
         <div class="register-form-container">
-            <form id="registerForm" method="post" action="register" class="register-form">
+            <form id="registerForm" method="post" action="home.jsp" class="register-form">
+                <input type="hidden" name="action" value="register">
+                
                 <!-- ユーザーネーム入力 -->
                 <div class="input-group">
                     <label for="username">ユーザーネーム</label>
@@ -183,44 +185,9 @@
                         placeholder="ユーザーネームを入力（3-20文字）"
                         maxlength="20"
                         minlength="3"
-                        value="<%= request.getAttribute("username") != null ? request.getAttribute("username") : "" %>"
-                        pattern="[a-zA-Z0-9_]+"
-                        title="英数字とアンダースコアのみ使用可能です"
                     >
                     <div class="password-requirements">
-                        ※ 3-20文字の英数字とアンダースコア(_)のみ使用可能
-                    </div>
-                </div>
-
-                <!-- メールアドレス入力 -->
-                <div class="input-group">
-                    <label for="email">メールアドレス（任意）</label>
-                    <input 
-                        type="email" 
-                        id="email" 
-                        name="email" 
-                        placeholder="メールアドレスを入力"
-                        maxlength="100"
-                        value="<%= request.getAttribute("email") != null ? request.getAttribute("email") : "" %>"
-                    >
-                    <div class="password-requirements">
-                        ※ パスワードリセット等に使用（任意項目）
-                    </div>
-                </div>
-
-                <!-- 表示名入力 -->
-                <div class="input-group">
-                    <label for="displayName">表示名（任意）</label>
-                    <input 
-                        type="text" 
-                        id="displayName" 
-                        name="displayName" 
-                        placeholder="ゲーム内で表示される名前"
-                        maxlength="50"
-                        value="<%= request.getAttribute("displayName") != null ? request.getAttribute("displayName") : "" %>"
-                    >
-                    <div class="password-requirements">
-                        ※ 50文字以内。未入力の場合はユーザー名が使用されます
+                        ※ 3文字以上20文字以下で入力してください
                     </div>
                 </div>
 
@@ -231,7 +198,7 @@
                         type="password" 
                         id="password" 
                         name="password" 
-                        required
+                        required 
                         placeholder="パスワードを入力（6文字以上）"
                         minlength="6"
                     >
@@ -259,10 +226,12 @@
                         ➕ アカウント登録
                     </button>
                 </div>
-            </form>            <!-- ログインリンク -->
+            </form>
+
+            <!-- ログインリンク -->
             <div class="login-section">
                 <p class="login-text">すでにアカウントをお持ちの方は</p>
-                <a href="login" class="login-link">
+                <a href="login.jsp" class="login-link">
                     🔑 ログイン画面へ
                 </a>
             </div>

@@ -121,32 +121,9 @@
             <p class="welcome-message">ログインしてゲームを始めましょう！</p>
         </div>        <!-- ログインフォーム -->
         <div class="login-form-container">
-            <%-- エラーメッセージ表示 --%>
-            <% 
-                String errorMessage = (String) request.getAttribute("errorMessage");
-                String successMessage = (String) request.getAttribute("successMessage");
-                String logoutParam = request.getParameter("logout");
+            <form id="loginForm" method="post" action="home.jsp" class="login-form">
+                <input type="hidden" name="action" value="login">
                 
-                if (errorMessage != null) {
-            %>
-            <div class="error-message">
-                <%= errorMessage %>
-            </div>
-            <% } %>
-            
-            <% if (successMessage != null) { %>
-            <div class="success-message" style="background: #e6ffe6; color: #28a745; padding: 10px; border-radius: 5px; margin-bottom: 15px; text-align: center;">
-                <%= successMessage %>
-            </div>
-            <% } %>
-            
-            <% if ("success".equals(logoutParam)) { %>
-            <div class="success-message" style="background: #e6ffe6; color: #28a745; padding: 10px; border-radius: 5px; margin-bottom: 15px; text-align: center;">
-                ログアウトしました。
-            </div>
-            <% } %>
-            
-            <form id="loginForm" method="post" action="login" class="login-form">
                 <!-- ユーザーネーム入力 -->
                 <div class="input-group">
                     <label for="username">ユーザーネーム</label>
@@ -157,7 +134,6 @@
                         required 
                         placeholder="ユーザーネームを入力"
                         maxlength="20"
-                        value="<%= request.getAttribute("username") != null ? request.getAttribute("username") : "" %>"
                     >
                 </div>
 
@@ -180,10 +156,12 @@
                         🔑 ログイン
                     </button>
                 </div>
-            </form>            <!-- アカウント作成リンク -->
+            </form>
+
+            <!-- アカウント作成リンク -->
             <div class="signup-section">
                 <p class="signup-text">アカウントをお持ちでない方は</p>
-                <a href="register" class="signup-btn">
+                <a href="register.jsp" class="signup-btn">
                     ➕ アカウント作成
                 </a>
             </div>
