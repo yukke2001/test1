@@ -1,0 +1,65 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>タイマーテスト - 強制クリア</title>
+    <meta charset="UTF-8">
+    <script src="ultra-simple-timer.js?v=20241205001"></script>
+</head>
+<body>
+    <h1>タイマーテスト画面</h1>
+    <p>この画面は、タイマーとクリア画面の動作をテストするためのものです。</p>
+    
+    <div id="timer-display">読み込み中...</div>
+    
+    <h2>テスト操作</h2>
+    <form method="post" action="game">
+        <input type="hidden" name="action" value="testclear" />
+        <button type="submit" style="background-color: #ff6b6b; color: white; padding: 10px 20px; border: none; border-radius: 5px;">
+            強制クリア（結果画面へ移動）
+        </button>
+    </form>
+    
+    <br><br>
+    <a href="game" style="color: #333;">通常ゲーム画面に戻る</a>
+    
+    <script>
+        // ページ読み込み時にタイマーを開始
+        window.addEventListener('DOMContentLoaded', function() {
+            console.log('テストページ読み込み完了');
+            
+            // タイマーが実行されていなければ開始
+            if (!window.gameRunning) {
+                window.startTimer();
+            }
+            
+            // タイマー表示を更新
+            updateTimerDisplay();
+            
+            // 1秒ごとに表示を更新
+            setInterval(updateTimerDisplay, 100);
+        });
+        
+        function updateTimerDisplay() {
+            const display = document.getElementById('timer-display');
+            if (window.gameStartTime && window.gameRunning) {
+                const elapsed = Date.now() - window.gameStartTime;
+                const formatted = formatGameTime(elapsed);
+                display.textContent = 'タイマー: ' + formatted;
+                display.style.color = 'green';
+            } else {
+                display.textContent = 'タイマー: 停止中';
+                display.style.color = 'red';
+            }
+        }
+        
+        function formatGameTime(ms) {
+            const minutes = Math.floor(ms / 60000);
+            const seconds = Math.floor((ms % 60000) / 1000);
+            const deciseconds = Math.floor((ms % 1000) / 100);
+            
+            return minutes.toString().padStart(2, '0') + ':' + 
+                   seconds.toString().padStart(2, '0') + '.' + deciseconds;
+        }
+    </script>
+</body>
+</html>

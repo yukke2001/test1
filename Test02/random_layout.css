@@ -1,0 +1,269 @@
+/*
+【神経衰弱ゲーム - 完全ランダム配置版CSS】
+random_layout.css
+
+確実にランダム配置を実現するための強制的なスタイル定義
+*/
+
+/* 基本リセット */
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+/* ページ全体のスタイル */
+body {
+    font-family: 'Arial', sans-serif;
+    margin: 0;
+    padding: 20px;
+    background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+    min-height: 100vh;
+    color: white;
+    text-align: center;
+}
+
+/* ゲームタイトル */
+h1 {
+    font-size: 2.5em;
+    margin-bottom: 30px;
+    text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.3);
+    color: #ffffff;
+}
+
+/* カードコンテナ - 絶対配置用 */
+.cards {
+    position: relative !important;
+    width: 1100px !important;
+    height: 800px !important;
+    margin: 0 auto 30px auto !important;
+    padding: 50px !important;
+    background: radial-gradient(circle at 30% 30%, #2d5016, #1a3009) !important;
+    border-radius: 20px !important;
+    box-shadow: 0 15px 35px rgba(0,0,0,0.4) !important;
+    overflow: hidden !important;
+    
+    /* グリッドを完全に無効化 */
+    display: block !important;
+    grid-template-columns: none !important;
+    grid-template-rows: none !important;
+    gap: 0 !important;
+}
+
+/* 全カード共通スタイル - 絶対配置を強制 */
+.cards .card {
+    position: absolute !important;
+    width: 90px !important;
+    height: 130px !important;
+    border: 2px solid #ffffff !important;
+    border-radius: 8px !important;
+    display: flex !important;
+    align-items: center !important;
+    justify-content: center !important;
+    background: linear-gradient(145deg, #f8f8f8, #e8e8e8) !important;
+    cursor: pointer !important;
+    transition: transform 0.3s ease !important;
+    box-shadow: 0 8px 16px rgba(0,0,0,0.25) !important;
+    z-index: 1 !important;
+    font-size: 24px !important;
+    font-weight: bold !important;
+    color: #333 !important;
+}
+
+/* 16枚のカードの個別位置 - !importantで強制適用 */
+.cards .card:nth-child(1) { 
+    left: 80px !important; 
+    top: 60px !important; 
+    transform: rotate(-12deg) !important; 
+}
+
+.cards .card:nth-child(2) { 
+    left: 220px !important; 
+    top: 45px !important; 
+    transform: rotate(8deg) !important; 
+}
+
+.cards .card:nth-child(3) { 
+    left: 380px !important; 
+    top: 75px !important; 
+    transform: rotate(-5deg) !important; 
+}
+
+.cards .card:nth-child(4) { 
+    left: 540px !important; 
+    top: 35px !important; 
+    transform: rotate(15deg) !important; 
+}
+
+.cards .card:nth-child(5) { 
+    left: 50px !important; 
+    top: 200px !important; 
+    transform: rotate(6deg) !important; 
+}
+
+.cards .card:nth-child(6) { 
+    left: 190px !important; 
+    top: 180px !important; 
+    transform: rotate(-18deg) !important; 
+}
+
+.cards .card:nth-child(7) { 
+    left: 350px !important; 
+    top: 210px !important; 
+    transform: rotate(3deg) !important; 
+}
+
+.cards .card:nth-child(8) { 
+    left: 500px !important; 
+    top: 190px !important; 
+    transform: rotate(-8deg) !important; 
+}
+
+.cards .card:nth-child(9) { 
+    left: 90px !important; 
+    top: 340px !important; 
+    transform: rotate(11deg) !important; 
+}
+
+.cards .card:nth-child(10) { 
+    left: 240px !important; 
+    top: 325px !important; 
+    transform: rotate(-6deg) !important; 
+}
+
+.cards .card:nth-child(11) { 
+    left: 390px !important; 
+    top: 355px !important; 
+    transform: rotate(9deg) !important; 
+}
+
+.cards .card:nth-child(12) { 
+    left: 530px !important; 
+    top: 335px !important; 
+    transform: rotate(-14deg) !important; 
+}
+
+.cards .card:nth-child(13) { 
+    left: 70px !important; 
+    top: 480px !important; 
+    transform: rotate(7deg) !important; 
+}
+
+.cards .card:nth-child(14) { 
+    left: 210px !important; 
+    top: 460px !important; 
+    transform: rotate(-11deg) !important; 
+}
+
+.cards .card:nth-child(15) { 
+    left: 370px !important; 
+    top: 490px !important; 
+    transform: rotate(4deg) !important; 
+}
+
+.cards .card:nth-child(16) { 
+    left: 520px !important; 
+    top: 470px !important; 
+    transform: rotate(-9deg) !important; 
+}
+
+/* ホバー効果 - 位置は変更せず、拡大のみ */
+.cards .card:hover {
+    transform: rotate(var(--rotation, 0deg)) scale(1.1) translateZ(10px) !important;
+    z-index: 10 !important;
+    box-shadow: 0 15px 25px rgba(0,0,0,0.4) !important;
+}
+
+/* 各カードにカスタムプロパティで回転角度を設定 */
+.cards .card:nth-child(1):hover { --rotation: -12deg; }
+.cards .card:nth-child(2):hover { --rotation: 8deg; }
+.cards .card:nth-child(3):hover { --rotation: -5deg; }
+.cards .card:nth-child(4):hover { --rotation: 15deg; }
+.cards .card:nth-child(5):hover { --rotation: 6deg; }
+.cards .card:nth-child(6):hover { --rotation: -18deg; }
+.cards .card:nth-child(7):hover { --rotation: 3deg; }
+.cards .card:nth-child(8):hover { --rotation: -8deg; }
+.cards .card:nth-child(9):hover { --rotation: 11deg; }
+.cards .card:nth-child(10):hover { --rotation: -6deg; }
+.cards .card:nth-child(11):hover { --rotation: 9deg; }
+.cards .card:nth-child(12):hover { --rotation: -14deg; }
+.cards .card:nth-child(13):hover { --rotation: 7deg; }
+.cards .card:nth-child(14):hover { --rotation: -11deg; }
+.cards .card:nth-child(15):hover { --rotation: 4deg; }
+.cards .card:nth-child(16):hover { --rotation: -9deg; }
+
+/* 表向きカードのスタイル */
+.cards .card span {
+    font-size: 32px !important;
+    color: #333 !important;
+    text-shadow: 1px 1px 2px rgba(0,0,0,0.1) !important;
+    pointer-events: none !important;
+}
+
+/* ?ボタンのスタイル */
+.cards .card .card-btn {
+    width: 85% !important;
+    height: 85% !important;
+    font-size: 42px !important;
+    font-weight: bold !important;
+    background: linear-gradient(145deg, #4CAF50, #45a049) !important;
+    color: white !important;
+    border: none !important;
+    border-radius: 6px !important;
+    cursor: pointer !important;
+    transition: all 0.2s ease !important;
+    box-shadow: 0 4px 8px rgba(0,0,0,0.2) !important;
+}
+
+.cards .card .card-btn:hover {
+    background: linear-gradient(145deg, #45a049, #3d8b40) !important;
+    transform: scale(0.95) !important;
+}
+
+.cards .card .card-btn:active {
+    box-shadow: 0 2px 4px rgba(0,0,0,0.3) !important;
+}
+
+/* 次へボタンエリア */
+.next-btn-area {
+    text-align: center !important;
+    margin: 30px 0 !important;
+}
+
+.next-btn {
+    padding: 12px 24px !important;
+    font-size: 18px !important;
+    background: linear-gradient(145deg, #2196F3, #1976D2) !important;
+    color: white !important;
+    border: none !important;
+    border-radius: 8px !important;
+    cursor: pointer !important;
+    transition: all 0.3s ease !important;
+    box-shadow: 0 4px 8px rgba(0,0,0,0.2) !important;
+}
+
+.next-btn:hover {
+    background: linear-gradient(145deg, #1976D2, #1565C0) !important;
+    transform: translateY(-2px) !important;
+    box-shadow: 0 6px 12px rgba(0,0,0,0.3) !important;
+}
+
+/* 強制的なレイアウト無効化 */
+.cards > * {
+    position: static !important;
+}
+
+.cards .card {
+    position: absolute !important;
+}
+
+/* フォーム要素のリセット */
+.cards .card form {
+    width: 100% !important;
+    height: 100% !important;
+    margin: 0 !important;
+    padding: 0 !important;
+    display: flex !important;
+    align-items: center !important;
+    justify-content: center !important;
+}

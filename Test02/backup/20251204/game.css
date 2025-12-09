@@ -1,0 +1,300 @@
+/*
+【神経衰弱ゲーム - 6枚カード用スタイルシート】
+game.css
+
+役割：神経衰弱ゲームの6枚カード（3×2グリッド）レイアウト
+対応：6枚カード（3×2グリッド）レイアウト
+*/
+
+/* ページ全体のスタイル */
+body {
+    font-family: 'Arial', sans-serif;
+    margin: 0;
+    padding: 20px;
+    background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+    min-height: 100vh;
+    color: white;
+    text-align: center;
+}
+
+/* ゲームタイトル */
+h1 {
+    font-size: 2.5em;
+    margin-bottom: 30px;
+    text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.3);
+    color: #ffffff;
+}
+
+/* カードグリッドコンテナ - 高級感のあるテーブル */
+.cards {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    grid-template-rows: repeat(2, 1fr);
+    gap: 25px;
+    width: 650px;
+    height: 450px;
+    margin: 0 auto 30px auto;
+    padding: 40px;
+    background: 
+        radial-gradient(circle at 30% 30%, #0f4c3a, #0d3a2a),
+        linear-gradient(135deg, #1a5842, #2d6b4e, #1a5842);
+    border-radius: 25px;
+    box-shadow: 
+        0 25px 50px rgba(0,0,0,0.5),
+        inset 0 3px 8px rgba(255,255,255,0.1),
+        inset 0 -3px 8px rgba(0,0,0,0.2);
+    position: relative;
+}
+
+/* テーブルの光沢効果 */
+.cards::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background: 
+        linear-gradient(
+            135deg, 
+            rgba(255,255,255,0.1) 0%, 
+            transparent 50%, 
+            rgba(255,255,255,0.05) 100%
+        );
+    border-radius: 25px;
+    pointer-events: none;
+}
+
+/* 個別カードのスタイル - トランプカード風 */
+.card {
+    width: 100%;
+    height: 100%;
+    border: 1px solid #ccc;
+    border-radius: 12px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background: 
+        linear-gradient(145deg, #ffffff 0%, #f8f8f8 50%, #eeeeee 100%);
+    cursor: pointer;
+    transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+    box-shadow: 
+        0 4px 12px rgba(0, 0, 0, 0.15),
+        0 2px 4px rgba(0, 0, 0, 0.1),
+        inset 0 1px 0 rgba(255, 255, 255, 0.8);
+    position: relative;
+    overflow: hidden;
+    transform-style: preserve-3d;
+}
+
+/* カードの紙質感を演出する疑似要素 */
+.card::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background: 
+        repeating-linear-gradient(
+            45deg,
+            transparent,
+            transparent 1px,
+            rgba(0,0,0,0.01) 1px,
+            rgba(0,0,0,0.01) 2px
+        );
+    border-radius: 12px;
+    pointer-events: none; /* 重要: クリックを通す */
+    z-index: 1;
+}
+
+/* カードの枠線効果 */
+.card::after {
+    content: '';
+    position: absolute;
+    top: 8px;
+    left: 8px;
+    right: 8px;
+    bottom: 8px;
+    border: 1px solid rgba(0,0,0,0.1);
+    border-radius: 8px;
+    pointer-events: none; /* 重要: クリックを通す */
+    z-index: 1;
+}
+
+/* カードボタンのスタイル - トランプ裏面風 */
+.card-btn {
+    width: 100%;
+    height: 100%;
+    border: none;
+    background: 
+        radial-gradient(ellipse at 30% 30%, #1e3a8a, #1e40af, #1d4ed8),
+        linear-gradient(135deg, #2563eb 0%, #1d4ed8 50%, #1e40af 100%);
+    color: #ffffff;
+    font-size: 2.5em;
+    font-weight: bold;
+    cursor: pointer;
+    border-radius: 10px;
+    text-shadow: 
+        0 2px 4px rgba(0,0,0,0.5),
+        0 0 8px rgba(255,255,255,0.2);
+    transition: all 0.3s ease;
+    position: relative;
+    overflow: hidden;
+    z-index: 10; /* 重要: 他の要素より前面に配置 */
+    pointer-events: auto; /* 重要: クリック可能にする */
+}
+
+/* カードボタンの装飾パターン */
+.card-btn::before {
+    content: '';
+    position: absolute;
+    top: -50%;
+    left: -50%;
+    width: 200%;
+    height: 200%;
+    background: 
+        repeating-conic-gradient(
+            from 0deg at 50% 50%, 
+            transparent 0deg, 
+            rgba(255,255,255,0.05) 30deg, 
+            transparent 60deg
+        );
+    animation: rotate 20s linear infinite;
+    pointer-events: none; /* 重要: 装飾はクリックを通す */
+    z-index: -1;
+}
+
+@keyframes rotate {
+    0% { transform: rotate(0deg); }
+    100% { transform: rotate(360deg); }
+}
+
+.card-btn:hover {
+    background: 
+        radial-gradient(ellipse at 30% 30%, #2563eb, #3b82f6, #60a5fa),
+        linear-gradient(135deg, #3b82f6 0%, #2563eb 50%, #1d4ed8 100%);
+    transform: scale(1.02) translateY(-2px);
+    box-shadow: 
+        0 6px 20px rgba(37, 99, 235, 0.4),
+        inset 0 1px 0 rgba(255,255,255,0.2);
+}
+
+/* カードホバー効果 - シンプル版（クリック可能性優先） */
+.card:hover {
+    transform: translateY(-5px) scale(1.02);
+    box-shadow: 
+        0 15px 30px rgba(0, 0, 0, 0.2),
+        0 8px 16px rgba(0, 0, 0, 0.1),
+        inset 0 2px 0 rgba(255, 255, 255, 0.9);
+    transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+/* 表向きカードのスタイル - エレガントな表面 */
+.card.open {
+    background: 
+        linear-gradient(145deg, #ffffff 0%, #fefefe 50%, #f8f8f8 100%);
+    font-size: 3em;
+    color: #333;
+    text-shadow: 
+        0 2px 4px rgba(0,0,0,0.1),
+        0 0 20px rgba(0,0,0,0.05);
+    border: 1px solid #e5e5e5;
+}
+
+/* 表向きカード内の絵文字を美しく表示 */
+.card.open .card-btn {
+    background: transparent;
+    color: inherit;
+    font-size: inherit;
+    text-shadow: 
+        0 2px 4px rgba(0,0,0,0.1),
+        0 0 10px rgba(255,255,255,0.8);
+}
+
+.card.open:hover {
+    transform: translateY(-3px) scale(1.01);
+    transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+/* 表向きカード内のspan要素 */
+.card.open span {
+    font-size: 3em;
+    color: #333;
+    text-shadow: 
+        0 2px 4px rgba(0,0,0,0.1),
+        0 0 20px rgba(0,0,0,0.05);
+    z-index: 5;
+    position: relative;
+}
+
+/* 裏向きカードのスタイル */
+.card.closed {
+    background: linear-gradient(145deg, #4a90e2, #357abd);
+    color: white;
+    font-size: 1.5em;
+}
+
+/* 消去されたカード - 美しいフェードアウト */
+.card.gone {
+    opacity: 0;
+    pointer-events: none;
+    transform: 
+        perspective(1000px) 
+        rotateY(180deg) 
+        scale(0.3) 
+        translateZ(-200px);
+    transition: all 0.8s cubic-bezier(0.4, 0, 0.2, 1);
+    filter: blur(2px);
+}
+
+/* カード内のフォーム要素のスタイル修正 */
+.card form {
+    width: 100%;
+    height: 100%;
+    margin: 0;
+    padding: 0;
+    position: relative;
+    z-index: 5;
+}
+
+/* ボタンスタイル */
+.button {
+    background: linear-gradient(145deg, #4CAF50, #45a049);
+    border: none;
+    color: white;
+    padding: 15px 32px;
+    text-align: center;
+    text-decoration: none;
+    display: inline-block;
+    font-size: 16px;
+    margin: 10px;
+    cursor: pointer;
+    border-radius: 8px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+    transition: all 0.3s ease;
+}
+
+.button:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 6px 12px rgba(0, 0, 0, 0.3);
+}
+
+/* 次へボタン */
+.next-button {
+    background: linear-gradient(145deg, #ff6b6b, #ee5253);
+}
+
+/* レスポンシブ対応 */
+@media (max-width: 768px) {
+    .cards {
+        width: 90%;
+        max-width: 500px;
+        height: 350px;
+        padding: 20px;
+    }
+    
+    h1 {
+        font-size: 2em;
+    }
+}

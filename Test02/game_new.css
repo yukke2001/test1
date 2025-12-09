@@ -1,0 +1,293 @@
+/*
+【神経衰弱ゲーム - 改良版スタイルシート】
+game_new.css - リアルなランダム配置版
+
+16枚カード対応 - テーブルに散らばったようなナチュラルな配置
+*/
+
+/* ページ全体のスタイル */
+body {
+    font-family: 'Arial', sans-serif;
+    margin: 0;
+    padding: 20px;
+    background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+    min-height: 100vh;
+    color: white;
+    text-align: center;
+}
+
+/* ゲームタイトル */
+h1 {
+    font-size: 2.5em;
+    margin-bottom: 30px;
+    text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.3);
+    color: #ffffff;
+}
+
+/* カードコンテナ - ランダム配置用（グリッドレイアウト無効化） */
+.cards {
+    position: relative;
+    width: 1000px;
+    height: 800px;
+    margin: 0 auto 30px auto;
+    padding: 50px;
+    background: 
+        radial-gradient(circle at 30% 30%, #2d5016, #1a3009),
+        linear-gradient(135deg, #2c5530, #3d6b40);
+    border-radius: 20px;
+    box-shadow: 
+        0 15px 35px rgba(0,0,0,0.4),
+        inset 0 2px 5px rgba(255,255,255,0.1);
+    overflow: visible;
+    /* グリッドプロパティを完全に無効化 */
+    display: block !important;
+    grid-template-columns: none !important;
+    grid-gap: 0 !important;
+}
+
+/* 個別カードのスタイル */
+.card {
+    position: absolute;
+    width: 100px;
+    height: 140px;
+    border: 2px solid #ffffff;
+    border-radius: 8px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background: linear-gradient(145deg, #f8f8f8, #e8e8e8);
+    cursor: pointer;
+    transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+    box-shadow: 
+        0 8px 16px rgba(0,0,0,0.25),
+        0 4px 8px rgba(0,0,0,0.15),
+        inset 0 1px 0 rgba(255,255,255,0.6);
+    transform-origin: center center;
+    font-size: 24px;
+    font-weight: bold;
+    color: #333;
+}
+
+/* カードの状態に関係なく、ランダム配置を維持 */mportantで優先度最高） */
+.card form,
+.card span,
+.card:empty {
+    /* フォームやスパンがある場合もカード位置は親要素から継承 */   transform: rotate(-12deg) !important; 
+    position: relative;
+    width: 100%;
+    height: 100%;
+    display: flex;   top: 45px !important; 
+    align-items: center;(8deg) !important; 
+    justify-content: center;
+}
+   left: 380px !important; 
+/* ランダムな位置と角度 - 16枚すべてに適用 */ant; 
+.card:nth-child(1) {  !important; 
+    left: 80px; top: 60px; 
+    transform: rotate(-12deg); card:nth-child(4) { 
+}    left: 540px !important; 
+.card:nth-child(2) { ant; 
+    left: 220px; top: 45px;  !important; 
+    transform: rotate(8deg); 
+}
+.card:nth-child(3) { 
+    left: 380px; top: 75px; 
+    transform: rotate(-5deg); 
+}   transform: rotate(6deg) !important; 
+.card:nth-child(4) { 
+    left: 540px; top: 35px; 
+    transform: rotate(15deg); 
+}   top: 200px !important; 
+(-18deg) !important; 
+.card:nth-child(5) { 
+    left: 50px; top: 220px; 
+    transform: rotate(6deg);    left: 350px !important; 
+}    top: 230px !important; 
+.card:nth-child(6) { (3deg) !important; 
+    left: 190px; top: 200px; 
+    transform: rotate(-18deg); 
+}   left: 500px !important; 
+.card:nth-child(7) { ant; 
+    left: 350px; top: 230px; !important; 
+    transform: rotate(3deg); 
+}
+.card:nth-child(8) { 
+    left: 500px; top: 210px; 
+    transform: rotate(-8deg); 
+}   transform: rotate(11deg) !important; 
+
+.card:nth-child(9) { 
+    left: 90px; top: 380px; 
+    transform: rotate(11deg);    top: 365px !important; 
+}    transform: rotate(-6deg) !important; 
+.card:nth-child(10) { 
+    left: 240px; top: 365px; 
+    transform: rotate(-6deg); 
+}   top: 395px !important; 
+.card:nth-child(11) { 9deg) !important; 
+    left: 390px; top: 395px; 
+    transform: rotate(9deg); 
+}   left: 530px !important; 
+.card:nth-child(12) { ant; 
+    left: 530px; top: 375px;  !important; 
+    transform: rotate(-14deg); 
+}
+
+.card:nth-child(13) { 
+    left: 70px; top: 540px; 
+    transform: rotate(7deg);    transform: rotate(7deg) !important; 
+}}
+.card:nth-child(14) { d(14) { 
+    left: 210px; top: 520px; px !important; 
+    transform: rotate(-11deg); 
+}otate(-11deg) !important; 
+.card:nth-child(15) { 
+    left: 370px; top: 550px; 
+    transform: rotate(4deg); !important; 
+}   top: 550px !important; 
+.card:nth-child(16) {     transform: rotate(4deg) !important; 
+    left: 520px; top: 530px; 
+    transform: rotate(-9deg); ild(16) { 
+}ortant; 
+important; 
+/* カードホバー効果 */
+.card:hover {
+    transform: translateY(-10px) scale(1.05);
+    box-shadow: ム配置を保持したまま） */
+        0 15px 25px rgba(0,0,0,0.3), {
+        0 8px 15px rgba(0,0,0,0.2); 
+    z-index: 10;5px rgba(0,0,0,0.3),
+}gba(0,0,0,0.2);
+tant;
+/* 表向きカードのスタイル */
+.card span {
+    font-size: 48px;
+    color: #333;
+    text-shadow: 2px 2px 4px rgba(0,0,0,0.2);
+    background: linear-gradient(145deg, #ffffff, #f0f0f0);
+    border-radius: 6px;
+    width: 90%;0,0,0,0.1);
+    height: 90%;
+    display: flex;
+    align-items: center;/* ?ボタンのスタイル */
+    justify-content: center;
+}
+
+/* 消去されたカード */   font-size: 48px;
+.card:empty {    font-weight: bold;
+    background: transparent !important;near-gradient(145deg, #4CAF50, #45a049);
+    border: 2px dashed rgba(255,255,255,0.3) !important;;
+    box-shadow: none !important;
+}
+   cursor: pointer;
+/* ?ボタンのスタイル */    transition: all 0.3s ease;
+.card-btn {: 
+    width: 90%;x rgba(0,0,0,0.2),
+    height: 90%;gba(255,255,255,0.3);
+    font-size: 48px;
+    font-weight: bold;
+    background: linear-gradient(145deg, #4CAF50, #45a049);.card-btn:hover {
+    color: white;und: linear-gradient(145deg, #45a049, #3d8b40);
+    border: none;98);
+    border-radius: 6px;
+    cursor: pointer;
+    transition: all 0.3s ease;{
+    box-shadow: 0 4px 8px rgba(0,0,0,0.2);
+}0,0,0,0.3),
+2px rgba(0,0,0,0.2);
+.card-btn:hover {
+    background: linear-gradient(145deg, #45a049, #3d8b40);
+    transform: scale(0.95);
+}
+   text-align: center;
+.card-btn:active {    margin: 30px 0;
+    box-shadow: 
+        0 2px 4px rgba(0,0,0,0.3),
+        inset 0 1px 2px rgba(0,0,0,0.2);
+}x 24px;
+
+/* 次へボタンエリア */6F3, #1976D2);
+.next-btn-area {   color: white;
+    text-align: center;    border: none;
+    margin: 30px 0;ius: 8px;
+}
+on: all 0.3s ease;
+.next-btn {
+    padding: 12px 24px;(0,0,0,0.2),
+    font-size: 18px;   inset 0 1px 0 rgba(255,255,255,0.3);
+    background: linear-gradient(145deg, #2196F3, #1976D2);
+    color: white;
+    border: none;
+    border-radius: 8px;-gradient(145deg, #1976D2, #1565C0);
+    cursor: pointer;ransform: translateY(-2px);
+    transition: all 0.3s ease;box-shadow: 
+    box-shadow: px rgba(0,0,0,0.3),
+        0 4px 8px rgba(0,0,0,0.2),ba(255,255,255,0.3);
+        inset 0 1px 0 rgba(255,255,255,0.3);
+}
+
+.next-btn:hover {x) {
+    background: linear-gradient(145deg, #1976D2, #1565C0);cards {
+    transform: translateY(-2px);       width: 800px;
+    box-shadow:         height: 600px;
+        0 6px 12px rgba(0,0,0,0.3),
+        inset 0 1px 0 rgba(255,255,255,0.3);
+}
+
+/* レスポンシブ対応 */
+@media (max-width: 1200px) {
+    .cards {
+        width: 800px;pan {
+        height: 600px;8px;
+    }
+    
+    .card {.card-btn {
+        width: 80px;e: 36px;
+        height: 112px;
+    }
+    
+    .card span {th: 900px) {
+        font-size: 28px;
+    }   width: 600px;
+           height: 450px;
+    .card-btn {        padding: 30px;
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+}    }        font-size: 28px;    .card-btn {        }        font-size: 20px;    .card span {        }        height: 84px;        width: 60px;    .card {        }        padding: 30px;        height: 450px;        width: 600px;    .cards {@media (max-width: 900px) {}    }        font-size: 36px;    }
+    
+    .card {
+        width: 60px;
+        height: 84px;
+    }
+    
+    .card span {
+        font-size: 20px;
+    }
+    
+    .card-btn {
+        font-size: 28px;
+    }
+}

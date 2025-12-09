@@ -1,0 +1,58 @@
+# 神経衰弱ゲーム（Test02）- ファイル保護設定
+
+## 削除禁止ファイル一覧
+# このリストのファイルは絶対に削除・名前変更禁止
+
+### JSPファイル（削除禁止）
+game.jsp
+game_backup.jsp
+game_enhanced.jsp
+index.jsp
+reset.jsp
+result.jsp
+
+### CSSファイル（削除禁止）
+card_effects.css
+game.css
+game_6cards.css
+game_new.css
+random_layout.css
+result.css
+start.css
+
+### 設定ファイル（削除禁止）
+WEB-INF/web.xml
+WEB-INF/classes/
+
+### ライブラリファイル（削除禁止）
+lib/javax.servlet-api-4.0.1.jar
+lib/postgresql-42.7.7.jar
+
+## 新機能開発時の推奨命名規則
+
+### 新規JSPファイル
+[機能名]_feature.jsp
+例：score_feature.jsp, multiplayer_feature.jsp
+
+### 新規CSSファイル
+[機能名]_feature.css
+例：score_feature.css, multiplayer_feature.css
+
+### 新規JSファイル
+[機能名]_feature.js
+例：score_feature.js, multiplayer_feature.js
+
+## ディレクトリ構造（推奨）
+features/          # 新機能専用
+assets/           # 共通アセット
+backup/           # 手動バックアップ
+docs/             # ドキュメント
+
+## 開発ルール
+1. 既存ファイルは変更前に必ずバックアップ
+2. 新機能は新規ファイルで実装
+3. 実験的機能は experimental_ プレフィックス使用
+4. バックアップファイルは絶対削除禁止
+
+## 最終更新日
+2025年12月4日

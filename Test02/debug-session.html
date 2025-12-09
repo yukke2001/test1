@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>セッションストレージ確認</title>
+</head>
+<body>
+    <h1>セッションストレージデバッグ</h1>
+    <div id="output"></div>
+    
+    <script>
+        console.log('=== セッションストレージ確認 ===');
+        
+        function showSessionStorage() {
+            const output = document.getElementById('output');
+            let html = '<h2>セッションストレージ内容:</h2>';
+            
+            if (sessionStorage.length === 0) {
+                html += '<p>セッションストレージは空です</p>';
+            } else {
+                html += '<ul>';
+                for (let i = 0; i < sessionStorage.length; i++) {
+                    const key = sessionStorage.key(i);
+                    const value = sessionStorage.getItem(key);
+                    html += `<li><strong>${key}:</strong> ${value}</li>`;
+                    console.log(`${key}: ${value}`);
+                }
+                html += '</ul>';
+            }
+            
+            const gameTime = sessionStorage.getItem('gameTime');
+            const gameTimeMs = sessionStorage.getItem('gameTimeMs');
+            
+            html += '<h3>タイマー関連:</h3>';
+            html += `<p>gameTime: ${gameTime}</p>`;
+            html += `<p>gameTimeMs: ${gameTimeMs}</p>`;
+            
+            output.innerHTML = html;
+        }
+        
+        showSessionStorage();
+        
+        // 5秒ごとに更新
+        setInterval(showSessionStorage, 5000);
+    </script>
+</body>
+</html>
