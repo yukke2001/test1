@@ -214,11 +214,9 @@ public class GameServlet extends HttpServlet {
                 cards.get(idx2).put(CARD_IS_GONE, true);
                 cleared += 2;
                 session.setAttribute(ATTR_CLEARED, cleared);
-                  // ゲームクリア判定（マッチした後にのみチェック）
+                
+                // ゲームクリア判定（マッチした後にのみチェック）
                 if (cleared == cards.size()) {
-                    // ゲーム完了時のスコア保存処理
-                    saveGameRecord(request, session, cards.size());
-                    
                     RequestDispatcher dispatcher = request.getRequestDispatcher(PAGE_RESULT);
                     dispatcher.forward(request, response);
                     return; // ゲームクリア時はここで処理終了
@@ -300,84 +298,5 @@ public class GameServlet extends HttpServlet {
         }
         
         return cards;  // 初期化されたカードデータを戻す
-    }
-    
-    /**
-     * 【ゲーム記録保存メソッド】
-     * ゲーム完了時にユーザーのプレイ記録をデータベースに保存
-     */
-    @SuppressWarnings("unchecked")
-    private void saveGameRecord(HttpServletRequest request, HttpSession session, int cardsCount) {
-        try {
-            // 認証状態の確認
-            Map<String, Object> currentUser = (Map<String, Object>) session.getAttribute("currentUser");
-            Boolean isAuthenticated = (Boolean) session.getAttribute("isAuthenticated");
-            
-            // ログインユーザーの場合のみ記録を保存
-            if (isAuthenticated != null && isAuthenticated && currentUser != null) {
-                // ユーザーID取得
-                Object userIdObj = currentUser.get("userId");
-                if (userIdObj == null) {
-                    userIdObj = currentUser.get("user_id"); // キー名の違いに対応
-                }
-                
-                if (userIdObj != null) {
-                    Long userId = null;
-                    if (userIdObj instanceof Integer) {
-                        userId = ((Integer) userIdObj).longValue();
-                    } else if (userIdObj instanceof Long) {
-                        userId = (Long) userIdObj;
-                    }
-                      // プレイ時間計算
-                    Long startTime = (Long) session.getAttribute(ATTR_START_TIME);
-                    if (startTime == null) {
-                        startTime = (Long) session.getAttribute("gameStartTime");
-                    }
-                    
-                    long playTimeSeconds = 0;
-                    if (startTime != null) {
-                        playTimeSeconds = (System.currentTimeMillis() - startTime) / 1000;
-                    }
-                    
-                    // 手数計算（セッションから取得または推定）
-                    Integer moves = (Integer) session.getAttribute("moveCount");
-                    if (moves == null) {
-                        // 手数が記録されていない場合は推定値を使用
-                        moves = cardsCount; // カード枚数と同程度の手数と仮定
-                    }
-                      // GameRecordDAOでデータベースに保存
-                    GameRecordDAO gameRecordDAO = new GameRecordDAO();
-                    boolean saveSuccess = gameRecordDAO.saveGameRecord(
-                        userId.intValue(), // LongをintType変換
-                        (int)playTimeSeconds, 
-                        cardsCount, 
-                        moves.intValue(), // IntegerをintType変換
-                        true, // perfect_game（現時点では全て true）
-                        "normal" // difficulty
-                    );
-                    
-                    if (saveSuccess) {
-                        // 保存成功メッセージをセッションに設定
-                        session.setAttribute("gameSaveMessage", "ゲーム記録を保存しました！");
-                        session.setAttribute("savedPlayTime", playTimeSeconds);
-                        session.setAttribute("savedMoves", moves);
-                        
-                        System.out.println("ゲーム記録保存成功 - ユーザーID: " + userId + ", 時間: " + playTimeSeconds + "秒");
-                    } else {
-                        System.err.println("ゲーム記録保存失敗 - ユーザーID: " + userId);
-                    }
-                } else {
-                    System.err.println("ユーザーIDが取得できませんでした");
-                }
-            } else {
-                // ゲストプレイの場合
-                System.out.println("ゲストプレイのため、記録は保存されません");
-                session.setAttribute("gameSaveMessage", "ゲストプレイ（記録は保存されません）");
-            }
-            
-        } catch (Exception e) {
-            System.err.println("ゲーム記録保存エラー: " + e.getMessage());
-            e.printStackTrace();
-        }
     }
 }
